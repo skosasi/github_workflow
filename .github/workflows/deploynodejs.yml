@@ -1,0 +1,50 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Deploy NodeJS App
+
+
+on:
+  workflow_call:
+    inputs:
+      DEPLOY_TARGET:
+        required: true
+        type: string
+    secrets:
+      DEPLOY_KEY:
+        required: true
+      DEPLOY_HOST:
+        required: true
+      DEPLOY_USER:
+        required: true
+      DEPLOY_PORT:
+        required: true
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
+      REMOTE_HOST: ${{ secrets.DEPLOY_HOST }}
+      REMOTE_USER: ${{ secrets.DEPLOY_USER }}
+      REMOTE_PORT: ${{ secrets.DEPLOY_PORT }}
+      EXCLUDE: "/node_modules/"
+    steps:
+      - uses: actions/checkout@v2
+      - name: deploy apps
+        uses: easingthemes/ssh-deploy@v2.1.4
+      - name: update permissions
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          envs: ${{ inputs.DEPLOY_TARGET }}
+          script: |
+            cd $TARGET
+            npm install
+            find . -type d -exec chmod 775 {} \;
+            find . -type f -exec chmod 664 {} \;
+            chmod +x ./node_modules/puppeteer/.local-chromium/linux-818858/chrome-linux/chrome
