@@ -29,7 +29,7 @@ jobs:
       REMOTE_HOST: ${{ secrets.DEPLOY_HOST }}
       REMOTE_USER: ${{ secrets.DEPLOY_USER }}
       REMOTE_PORT: ${{ secrets.DEPLOY_PORT }}
-      TARGET: ${{ secrets.REMOTE_TARGET }}
+      TARGET: ${{ inputs.DEPLOY_TARGET }}
       EXCLUDE: "/node_modules/"
     steps:
       - uses: actions/checkout@v2
