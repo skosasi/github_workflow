@@ -49,4 +49,5 @@ jobs:
             npm install
             find . -type d -exec chmod 775 {} \;
             find . -type f -exec chmod 664 {} \;
-            chmod +x ./node_modules/puppeteer/.local-chromium/linux-818858/chrome-linux/chrome
+            pm2 startOrReload app.config.js;
+            chmod +x ./node_modules/puppeteer/.local-chromium/linux-818858/chrome-linux/chrome;
