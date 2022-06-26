@@ -18,7 +18,7 @@ jobs:
   deploynodejs:
     uses: skosasi/github_workflow/.github/workflows/deploynodejs.yml@main
     with:
-      DEPLOY_SOURCE: ./sample/nodejs
+      DEPLOY_SOURCE: ./sample/nodejs/
       DEPLOY_TARGET: /app/deploynodejs_sample
     secrets:
       DEPLOY_KEY: ${{secrets.MUTASIKU_CLUB_KEY}}
