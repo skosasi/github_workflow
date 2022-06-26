@@ -16,7 +16,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   deploynodjs:
-    uses: skosasi/github_workflow/blob/main/.github/workflows/deploynodejs.yml@main
+    uses: skosasi/github_workflow/.github/workflows/deploynodejs.yml@main
     with:
       DEPLOY_TARGET: /app/
     secrets:
