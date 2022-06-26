@@ -43,7 +43,7 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
           port: ${{ secrets.DEPLOY_PORT }}
-          envs: ${{ TARGET }}
+          envs: TARGET
           script: |
             cd $TARGET
             pwd
