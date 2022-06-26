@@ -20,6 +20,7 @@ jobs:
     with:
       DEPLOY_SOURCE: ./sample/nodejs/
       DEPLOY_TARGET: /app/deploynodejs_sample
+      PM2_FILENAME: app_sample.config.js
     secrets:
       DEPLOY_KEY: ${{secrets.MUTASIKU_CLUB_KEY}}
       DEPLOY_HOST: ${{secrets.MUTASIKU_CLUB_HOST}}

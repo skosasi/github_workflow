@@ -12,6 +12,9 @@ on:
       DEPLOY_TARGET:
         required: true
         type: string
+      PM2_FILENAME:
+        required: true
+        type: string
     secrets:
       DEPLOY_KEY:
         required: true
@@ -34,6 +37,7 @@ jobs:
       REMOTE_PORT: ${{ secrets.DEPLOY_PORT }}
       SOURCE: ${{ inputs.DEPLOY_SOURCE }}
       TARGET: ${{ inputs.DEPLOY_TARGET }}
+      PM2_FILENAME: ${{ inputs.PM2_FILENAME }}
       EXCLUDE: "/node_modules/"
     steps:
       - uses: actions/checkout@v2
@@ -53,5 +57,5 @@ jobs:
             npm install
             find . -type d -exec chmod 775 {} \;
             find . -type f -exec chmod 664 {} \;
-            pm2 startOrReload app.config.js;
+            pm2 startOrReload $PM2_FILENAME;
             chmod +x ./node_modules/puppeteer/.local-chromium/linux-818858/chrome-linux/chrome;
