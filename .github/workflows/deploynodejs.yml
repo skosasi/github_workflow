@@ -43,9 +43,10 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
           port: ${{ secrets.DEPLOY_PORT }}
-          envs: ${{ inputs.DEPLOY_TARGET }}
+          envs: ${{ TARGET }}
           script: |
             cd $TARGET
+            pwd
             npm install
             find . -type d -exec chmod 775 {} \;
             find . -type f -exec chmod 664 {} \;
