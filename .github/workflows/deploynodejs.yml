@@ -6,6 +6,9 @@ name: Deploy NodeJS App
 on:
   workflow_call:
     inputs:
+      DEPLOY_SOURCE:
+        required: true
+        type: string
       DEPLOY_TARGET:
         required: true
         type: string
@@ -29,7 +32,7 @@ jobs:
       REMOTE_HOST: ${{ secrets.DEPLOY_HOST }}
       REMOTE_USER: ${{ secrets.DEPLOY_USER }}
       REMOTE_PORT: ${{ secrets.DEPLOY_PORT }}
-      SOURCE: "./"
+      SOURCE: ${{ inputs.DEPLOY_SOURCE }}
       TARGET: ${{ inputs.DEPLOY_TARGET }}
       EXCLUDE: "/node_modules/"
     steps:
